@@ -104,4 +104,29 @@ lablename.grid(row=1,column=6)
 textname=Entry(bill_frame,textvariable=Amount,font=("calibri",15),width=25,)
 textname.grid(row=2,column=6)
 # Header space----------------------
+
+# Table Frame
+tree_frame = Frame(root, bg="#ecf0f1")
+tree_frame.place(x=0, y=480, width=1980, height=520)
+style = ttk.Style()
+style.configure("mystyle.Treeview", font=('Calibri', 18),
+                rowheight=50)  # Modify the font of the body
+style.configure("mystyle.Treeview.Heading", font=('Calibri', 18))  # Modify the font of the headings
+tv = ttk.Treeview(tree_frame, columns=(1, 2, 3, 4, 5, 6, 7, 8), style="mystyle.Treeview")
+tv.heading("1", text="ID")
+tv.column("1", width=5)
+tv.heading("2", text="Name")
+tv.heading("3", text="Age")
+tv.column("3", width=5)
+tv.heading("4", text="D.O.B")
+tv.column("4", width=10)
+tv.heading("5", text="Email")
+tv.heading("6", text="Gender")
+tv.column("6", width=10)
+tv.heading("7", text="Contact")
+tv.heading("8", text="Address")
+tv['show'] = 'headings'
+tv.bind("<ButtonRelease-1>", getData)
+tv.pack(fill=X)
+
 mainloop()
