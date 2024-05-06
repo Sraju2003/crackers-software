@@ -13,7 +13,7 @@ root.state("zoomed")
 # Title shop name----------------
 entries_frames=Frame(root,bg="#382D72")
 entries_frames.pack(side=TOP,fill=X)
-title=Label(entries_frames,text="welcome To Kannaku Pillai📘",font=("calibri",45,"bold"),bg="#382D72" ,fg="white")
+title=Label(entries_frames,text="welcome To Bill Sheet",font=("calibri",45,"bold"),bg="#382D72" ,fg="white")
 title.pack(pady=100)
 
 
@@ -22,16 +22,16 @@ login_frame=Frame(root,bg="#6A6097")
 login_frame.pack()
 
 #  username ---------------
-label = Label(login_frame,text="Username",font=("calibri",20,"bold"),bg="#6A6097" ,fg="white")
-label.grid(row=0,column=0)
-textname=Entry(login_frame,textvariable=username,font=("calibri",15),width=25)
-textname.grid(row=0,column=1,pady=20 ,padx=10)
+label_username = Label(login_frame,text="Username",font=("calibri",20,"bold"),bg="#6A6097" ,fg="white")
+label_username.grid(row=0,column=0)
+textusername=Entry(login_frame,textvariable=username,font=("calibri",15),width=25)
+textusername.grid(row=0,column=1,pady=20 ,padx=10)
 
 #  password ---------------
-label = Label(login_frame,text="Password",font=("calibri",20,"bold"),bg="#6A6097" ,fg="white")
-label.grid(row=1,column=0)
-textname=Entry(login_frame,textvariable=password,font=("calibri",15),width=25)
-textname.grid(row=1,column=1,pady=20 ,padx=10)
+label_pass = Label(login_frame,text="Password",font=("calibri",20,"bold"),bg="#6A6097" ,fg="white")
+label_pass.grid(row=1,column=0)
+textpass=Entry(login_frame,textvariable=password,font=("calibri",15),width=25)
+textpass.grid(row=1,column=1,pady=20 ,padx=10)
 
 #  button ---------
 # button function action------

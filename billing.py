@@ -1,5 +1,7 @@
+import tkinter
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 
 root = Tk()
 name=StringVar()
@@ -7,11 +9,12 @@ ph_no=StringVar()
 bill_no=StringVar()
 emp_name=StringVar()
 date=StringVar()
-S_no=StringVar()
-Product=StringVar()
-Quantity=StringVar()
-Discount=StringVar()
-Amount=StringVar()
+code=StringVar()
+product=StringVar()
+price=StringVar()
+quantity=StringVar()
+discount=StringVar()
+amount=StringVar()
 
 
 menu = Menu(root)
@@ -71,7 +74,7 @@ textdate=Entry(entries_frames,textvariable=date,font=("calibri",15),width=25)
 textdate.grid(row=1,column=6 ,padx=10,sticky="w")
 
 # number space--------------
-lablenumber=Label(entries_frames,text="Phone No.s",font=("calibri",15),bg="#A080E1" ,fg="white")
+lablenumber=tkinter.Label(entries_frames,text="Phone No.s",font=("calibri",15),bg="#A080E1" ,fg="white")
 lablenumber.grid(row=2,column=1,sticky="w")
 textnumber=Entry(entries_frames,textvariable=ph_no,font=("calibri",15),width=25)
 textnumber.grid(row=2,column=2,padx=10,sticky="w" ,pady=10)
@@ -88,63 +91,77 @@ bill_frame.pack(fill=X)
 
 
 # Header space opens----------------------
-lableS_no=Label(bill_frame,text="S.No",font=("calibri",15),bg="#E5CCF4" ,fg="black",width=10)
-lableS_no.grid(row=1,column=1,sticky="w")
-textS_no=Entry(bill_frame,textvariable=S_no,font=("calibri",15),width=10,)
-textS_no.grid(row=2,column=1,sticky="w")
+lablecode=Label(bill_frame,text="Code",font=("calibri",15),bg="#E5CCF4" ,fg="black",width=10)
+lablecode.grid(row=1,column=1,sticky="w")
+textcode=Entry(bill_frame,textvariable=code,font=("calibri",15),width=10,)
+textcode.grid(row=2,column=1,sticky="w")
 
 # Product ----------------------
-lableproduct=Label(bill_frame,text="Product Name",font=("calibri",15),bg="#E5CCF4" ,fg="black",width=30)
-lableproduct.grid(row=1,column=2,columnspan=2,sticky="w")
-textproduct=Entry(bill_frame,textvariable=Product,font=("calibri",15),width=30,)
-textproduct.grid(row=2,column=2,columnspan=2,sticky="w")
+product_label = tkinter.Label(bill_frame, text="product",font=("calibri",15),bg="#E5CCF4" ,fg="black",width=30)
+product_label.grid(row=1, column=2,columnspan=2)
+product_entry = tkinter.Entry(bill_frame,font=("calibri",15),width=30)
+product_entry.grid(row=2, column=2,columnspan=2)
+# Price--------------------------
+price_label = tkinter.Label(bill_frame, text="price",font=("calibri",15),bg="#E5CCF4" ,fg="black",width=20)
+price_label.grid(row=1, column=4)
+price_spinbox = tkinter.Spinbox(bill_frame, from_=0, to=100,font=("calibri",15),width=20)
+price_spinbox.grid(row=2, column=4)
 
 # Quantity----------------------
-lableqyantity=Label(bill_frame,text="Quantity",font=("calibri",15),bg="#E5CCF4" ,fg="black",width=18)
-lableqyantity.grid(row=1,column=4,sticky="w")
-textqyantity=Entry(bill_frame,textvariable=Quantity,font=("calibri",15),width=18,)
-textqyantity.grid(row=2,column=4,sticky="w")
+qty_label = tkinter.Label(bill_frame, text="Quantity",font=("calibri",15),bg="#E5CCF4" ,fg="black",width=20)
+qty_label.grid(row=1, column=5)
+qty_spinbox = tkinter.Spinbox(bill_frame, from_=1, to=100,font=("calibri",15),width=20)
+qty_spinbox.grid(row=2, column=5)
 
 # Discount----------------------
-lablediscount=Label(bill_frame,text="Discount",font=("calibri",15),bg="#E5CCF4" ,fg="black",width=18)
-lablediscount.grid(row=1,column=5,sticky="w")
-textdiscount=Entry(bill_frame,textvariable=Discount,font=("calibri",15),width=18,)
-textdiscount.grid(row=2,column=5,sticky="w")
+dis_label = tkinter.Label(bill_frame, text="Discount",font=("calibri",15),bg="#E5CCF4" ,fg="black",width=20)
+dis_label.grid(row=1, column=6)
+dis_entry = tkinter.Entry(bill_frame,font=("calibri",15),width=20)
+dis_entry.grid(row=2, column=6)
 
 # Amount----------------------
-lableamount=Label(bill_frame,text="Amount",font=("calibri",15),bg="#E5CCF4" ,fg="black",width=25)
-lableamount.grid(row=1,column=6,sticky="w")
-textamount=Entry(bill_frame,textvariable=Amount,font=("calibri",15),width=25,)
-textamount.grid(row=2,column=6,sticky="w")
+amount_label = tkinter.Label(bill_frame, text="Amount",font=("calibri",15),bg="#E5CCF4" ,fg="black",width=20)
+amount_label.grid(row=1, column=7)
+amount_spinbox = tkinter.Spinbox(bill_frame, from_=0.0, to=50000, font=("calibri",15),width=20)
+amount_spinbox.grid(row=2, column=7)
 
 #button---------------
-def add():
-    pass
+
+def add_item():
+    qty = int(qty_spinbox.get())
+    desc = desc_entry.get()
+    price = float(price_spinbox.get())
+    line_total = qty*price
+    invoice_item = [qty, desc, price, line_total]
+    tree.insert('',0, values=invoice_item)
+    clear_item()
+
+    invoice_list.append(invoice_item)
+
+add_item_button = tkinter.Button(bill_frame, text = "Add item", command = add_item,font=("calibri",15),bg="#E5CCF4" ,fg="black",width=10)
+add_item_button.grid(row=2, column=8, pady=5)
+
+
+
 
 # btn_frame=Frame(login_frame,bg="#E5CCF4")
-btnlog=Button(bill_frame,command=add,text="Add_Items",bg="#E5CCF4",font=("calibri",15),width=25).grid(row=2,column=7,pady=1,padx=10)
 
+
+#  
 # Header space close----------------------
+columns = ('desc', 'price', 'qty','dis', 'total')
 
-# Table Frame
-table_frame= Frame(root,bg="#B7C2C6")
-table_frame.place(x=20,y=250,width=1500,height=450)
-style= ttk.Style()
-style.configure("mystyle.Treeview.", font=('calibri',14,),rowheight=50)
-style.configure("mystyle.Treeview.Heading", font=('calibri',16),)
-#modify font of the body-------------
-tv=ttk.Treeview(table_frame,columns=(1,2,3,4,5),style="mystyle.Treeview")
-tv.heading("1",text="S_no")
-tv.column("1",width=10)
-tv.heading("2",text="Product")
-tv.heading("3",text="Quantity")
-tv.column("3",width=10)
-tv.heading("4",text="Discount")
-tv.column("4",width=10)
-tv.heading("5",text="Amount")
-tv.column("5",width=20)
-tv['show']='headings'
-tv.pack(fill=X)
+style = ttk.Style()
+style.configure("mystyle.Treeview", font=('Calibri', 18), rowheight=50)  # Modify the font of the body
+style.configure("mystyle.Treeview.Heading", font=('Calibri', 18))  # Modify the font of the headings
 
+tree = ttk.Treeview(bill_frame, columns=columns, show="headings")
+tree.heading('qty', text='Qty')
+tree.column('qty',width=20)
+tree.heading('desc', text='Product')
+tree.heading('price', text='Price')
+tree.heading('total', text="Amount")
+tree.heading('dis',text='Discount')
 
+tree.grid(row=4, column=0, columnspan=9,padx=10)
 mainloop()
